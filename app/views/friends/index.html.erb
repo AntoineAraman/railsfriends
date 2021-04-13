@@ -1,0 +1,47 @@
+
+<% if user_signed_in? %>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Twitter</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friends.each do |friend| %>
+      <tr>
+        <% if current_user == friend.user %>
+        <td>
+<%= link_to friend.First_name + " " + friend.Last_name, friend %>
+          </td>
+        <td><%= friend.email %></td>
+        <td><%= friend.phone %></td>
+        <td><%= friend.twitter %></td>
+        <td><%= link_to 'Delete', friend, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger btn-sm" %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friend', new_friend_path, class:"btn btn-secondary" %>
+
+<% else %>
+<div style="background-color:#6E8894;text-align: center;padding-top: 1em;padding-bottom: 1em; border-radius: 50%;border-color: #DEEFB7; border-width: 0.2em; border-style: solid;width: 100%vw;">
+<h1>Hello World!</h1>
+</div>
+<br>  
+<div style="border: 0.2rem solid #DEEFB7; background-image: linear-gradient(to bottom right,#773344,#0D1821); color:#E8B4BC;text-align: center;"> 
+<h2>Welcome to my friends application!</h2>
+</div>
+<br>  
+<p>Please head to the <em>sign-in</em> or <em> sign-up</em> page or read <em> about us </em> in the corresponding tab!</p>
+
+
+<% end %>
